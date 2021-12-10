@@ -2,9 +2,9 @@
 Helper files for working in Xcode
 
 ## Workflows 
-This directory contains Automator workflows to help find things in GitHub. 
+This directory contains Automator Workflows to improve GitHub interactions. 
 
-<img width="888" alt="image" src="https://user-images.githubusercontent.com/61445278/145499504-98f1cb98-0805-4050-96e8-ef0c5815f667.png">
+![README](https://user-images.githubusercontent.com/61445278/145518964-6a91ee0f-fecd-4dcd-b0de-690ccadb94a0.png)
 
 ### Limitations
 * If your file is edited but not saved, these workflows will fail.
