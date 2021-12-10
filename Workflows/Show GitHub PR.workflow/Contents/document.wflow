@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>512</string>
+	<key>AMApplicationVersion</key>
+	<string>2.10</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run AppleScript.action</string>
+				<key>ActionName</key>
+				<string>Run AppleScript</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>source</key>
+					<string>on run {input, parameters}	# Ask Xcode:	# - activeDocument		The currently active source file	# - activeDocumentPath	The file path of the file	# - selectedLines		The selected lines 	tell application "Xcode"		set activeDocument to document 1 whose name ends with (word -1 of (get name of window 1))		set activeDocumentPath to path of activeDocument		set currentLines to selected paragraph range of activeDocument		set startLine to get item 1 of currentLines as string	end tell		# Determine full path to the repo root directory	set activeDocumentDirectory to do shell script "dirname " &amp; activeDocumentPath	set goToActiveDocumentDirectory to "cd " &amp; activeDocumentDirectory &amp; ";"	set getRepoRootDirectory to "git rev-parse --show-toplevel;"	set repoDirectoryPath to do shell script (goToActiveDocumentDirectory &amp; getRepoRootDirectory)		# Use git log to determine the full associated SHA	set goToRepoDirectory to "cd " &amp; repoDirectoryPath &amp; ";"	set gitLogMostRecent to "git log -1 --format=%H "	set forLineRange to "-L" &amp; startLine &amp; "," &amp; startLine	set andFile to ":" &amp; activeDocumentPath	set shaOnly to " | head -n 1;"	set sha to do shell script goToRepoDirectory &amp; gitLogMostRecent &amp; forLineRange &amp; andFile &amp; shaOnly		# Create the URL	set repoURL to do shell script goToRepoDirectory &amp; "git config --get remote.origin.url | sed 's|.git$||g';"	set relativeURL to "/commit/" &amp; sha	set permalinkURL to repoURL &amp; relativeURL		# Open the URL 	do shell script "open " &amp; permalinkURL &amp; ";"end run</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.RunScript</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunScriptAction</string>
+				<key>InputUUID</key>
+				<string>AE09B637-7C8E-49FE-89F9-90DBF8E7CE2D</string>
+				<key>Keywords</key>
+				<array>
+					<string>Run</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>A6B4C8A0-FC7B-4CA5-A507-AF8B766D4384</string>
+				<key>UUID</key>
+				<string>60D2FC00-6992-4C96-A58A-4DC7804CE0B8</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string>on run {input, parameters}
+	
+	(* Your script goes here *)
+	
+	return input
+end run</string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
+				<key>isViewVisible</key>
+				<integer>1</integer>
+				<key>location</key>
+				<string>498.000000:1180.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict/>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>applicationBundleID</key>
+		<string>com.apple.dt.Xcode</string>
+		<key>applicationBundleIDsByPath</key>
+		<dict>
+			<key>/Applications/Xcode.app</key>
+			<string>com.apple.dt.Xcode</string>
+		</dict>
+		<key>applicationPath</key>
+		<string>/Applications/Xcode.app</string>
+		<key>applicationPaths</key>
+		<array>
+			<string>/Applications/Xcode.app</string>
+		</array>
+		<key>inputTypeIdentifier</key>
+		<string>com.apple.Automator.text</string>
+		<key>outputTypeIdentifier</key>
+		<string>com.apple.Automator.nothing</string>
+		<key>presentationMode</key>
+		<integer>11</integer>
+		<key>processesInput</key>
+		<false/>
+		<key>serviceApplicationBundleID</key>
+		<string>com.apple.dt.Xcode</string>
+		<key>serviceApplicationPath</key>
+		<string>/Applications/Xcode.app</string>
+		<key>serviceInputTypeIdentifier</key>
+		<string>com.apple.Automator.text</string>
+		<key>serviceOutputTypeIdentifier</key>
+		<string>com.apple.Automator.nothing</string>
+		<key>serviceProcessesInput</key>
+		<false/>
+		<key>systemImageName</key>
+		<string>NSActionTemplate</string>
+		<key>useAutomaticInputType</key>
+		<false/>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.servicesMenu</string>
+	</dict>
+</dict>
+</plist>
